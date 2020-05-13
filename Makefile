@@ -1,4 +1,4 @@
-setup: get-clj-kondo get-bb
+
 
 
 get-clj-kondo:
@@ -12,7 +12,13 @@ get-bb:
 	unzip /tmp/bb.zip
 	mv bb ./bin/
 
-build:
-	docker build . -t codeclimate-clj-kondo
+setup: get-clj-kondo get-bb get-cc-cli
 
-.PHONY: setup get-bb get-clj-kondo build
+build:
+	docker build . -t codeclimate/codeclimate-clj-kondo
+
+
+cc-test:
+	script/cc-run
+
+.PHONY: setup get-bb get-clj-kondo get-cc-cli build
